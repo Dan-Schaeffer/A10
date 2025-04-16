@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Cookie Example</h2>
+    <label for="username">Please enter your name:</label>
+    <input type="text" id="username" placeholder="Your name">
+    <button onclick="setCookie()">Save Cookie</button>
+
+    <div class="cookie-message" id="cookieMessage"></div>
+
+    <script>
+        
+        function setCookie() {
+            const name = document.getElementById("username").value;
+            if (name) {
+                const d = new Date();
+                d.setTime(d.getTime() + (7*24*60*60*1000));
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = "username=" + name + ";" + expires + ";path=/";
+                displayCookie();
+            } else {
+                alert("Please enter a name.");
+            }
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function displayCookie() {
+            let user = getCookie("username");
+            if (user != "") {
+                document.getElementById("cookieMessage").innerText = "Welcome back, " + user;
+            } else {
+                document.getElementById("cookieMessage").innerText = "No cookie found. Please enter your name.";
+            }
+        }
+
+        // Run on page load
+        window.onload = function() {
+            displayCookie();
+        };
+    </script>
+</body>
+</html>
