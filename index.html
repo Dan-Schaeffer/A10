@@ -10,11 +10,16 @@
     <label for="username">Please enter your name:</label>
     <input type="text" id="username" placeholder="Your name">
     <button onclick="setCookie()">Save Cookie</button>
-
+    
     <div class="cookie-message" id="cookieMessage"></div>
 
+
+    <footer>
+        <p>Copyright &copy; 2025 Daniel Schaeffer</p>
+    </footer>
+    
     <script>
-        
+
         function setCookie() {
             const name = document.getElementById("username").value;
             if (name) {
@@ -58,5 +63,6 @@
             displayCookie();
         };
     </script>
+
 </body>
 </html>
